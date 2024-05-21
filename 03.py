@@ -94,5 +94,6 @@ for track in tracks:
     album.add_track(track)
 
 album.play_all_tracks()
-
+track.pause()
+track.resume()
 
