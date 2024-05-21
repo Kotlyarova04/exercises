@@ -4,7 +4,7 @@ import time
 class Music:
     def __init__(self, title, duration, artist, year):
         self.title = title
-        self.duration = duration
+        self.duration = self.change_minutes(duration)
         self.artist = artist
         self.year = year
         self.playing = False
@@ -12,6 +12,9 @@ class Music:
         self.time_played = 0
         self.end = False
 
+    def change_minutes(self, duration):
+        minutes, seconds = duration.split(':')
+        return int(minutes)*60 + int(seconds)
     def play(self):
         if self.playing:
             print(f"Трек '{self.title}' уже воспроизводится.")
@@ -65,33 +68,31 @@ class Music:
                 print(f"Трек '{self.title}' на паузе.")
 
 class Album:
-    def __init__(self, title, artist, year):
+    def __init__(self, title):
         self.title = title
-        self.artist = artist
-        self.year = year
         self.tracks = []
 
     def add_track(self, track):
         self.tracks.append(track)
 
     def play_all_tracks(self):
-        print(f"Воспроизведение альбома '{self.title}' исполнителя {self.artist} ({self.year})...")
         for track in self.tracks:
             track.play()
 
-# Пример использования:
-track1 = Music("Violet", '3:38', "SEREBRO", 2024)
-track2 = Music("Runaway baby 2", '2:28', "Bruno Mars", 2010)
+def add(filename):
+    tracks = []
+    with open(filename, encoding='utf-8') as f:
+        for track in f:
+            track = track.split(',')
+            title, duration, artist, year = track[0:4]
+            tracks.append(Music(title, duration, artist, int(year)))
+        return tracks
 
-album.add_track(track1)
-album.add_track(track2)
+album = Album('My playlist')
+tracks = add('tracks.txt')
+for track in tracks:
+    album.add_track(track)
 
-# Воспроизведение всех треков альбома
 album.play_all_tracks()
-
-# Пауза и возобновление воспроизведения трека
-track1.pause()
-track1.resume()
-
 
 

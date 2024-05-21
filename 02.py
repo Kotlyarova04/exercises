@@ -52,34 +52,20 @@ class ShoppingCart:
             self.total_cost -= self.calculate_product_price(product)
 
     def calculate_product_price(self, product):
-        # Placeholder method for calculating product price
-        return 10  # Example price
-
+        return 10
     def get_total_cost(self):
         return self.total_cost
 
 
-# Пример использования:
-
-# Создание экземпляра корзины
 cart = ShoppingCart()
 
-# Загрузка данных из файла
 cart.load_data_from_file('products.txt')
-
-# Добавление нового товара
 new_product = Product("1234567890123")
 new_product.set_country_of_origin("Russia")
 new_product.set_other_info("Some other info about the product")
 cart.add_product(new_product)
-
-# Удаление товара
 cart.remove_product(new_product)
-
-# Выгрузка данных в файл
 cart.save_data_to_file('updated_products.txt')
-
-# Получение общей стоимости
 total_cost = cart.get_total_cost()
 print("Total cost of the products in the shopping cart:", total_cost)
 
