@@ -1,0 +1,2 @@
+1234567890123,Russia,Some other info about the product,10.00
+9876543210987,China,Additional info,20.50
